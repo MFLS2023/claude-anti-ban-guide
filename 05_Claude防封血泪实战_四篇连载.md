@@ -119,16 +119,17 @@
 │
 第二重：浏览器指纹对齐 (https://claudetester.com) ────── 专测 Canvas/时区/语言/字体完整度
 │
-第三重：IP 欺诈信誉库 (https://scamalytics.com/ip/{IP}) 核心指标：Fraud Score 必须 < 15 分
+第三重：IP 欺诈与类型双查 (https://iplark.com/ 与 https://scamalytics.com/) 核心指标：Fraud Score 必须 < 15 分
 │
 第四重：ASN 运营商属性 (https://ipinfo.io/{IP}) ────────── 核心指标：Type 必须为 isp，非 hosting
 ```
 
 1. **`https://ip.net.coffee/claude/`（Claude 专属综合检测）**：检测出口 IP 是否被 Claude 标记为数据中心，排查 WebRTC 与 DNS 漏网；
 2. **`https://claudetester.com`（Claude 浏览器指纹检测）**：检测当前浏览器窗口的时区、系统语言、字体和 Canvas 特征是否与代理 IP 所在地 100% 对齐；
-3. **`https://scamalytics.com/ip/{IP}`（反欺诈数据库）**：查看欺诈分值（Fraud Score），安全门禁为 **< 15 分**（低风险绿色区间）；
-4. **`https://ipinfo.io/{IP}`（运营商属性核验）**：核对 `org` 与 `asn`，**`type` 字段必须显示为 `isp`（住宅宽带）**，绝不能为 `hosting`（机房数据中心）；
-5. **`https://browserleaks.com/webrtc`（WebRTC 深度排查）**：确保页面中的 Public IP 与 Local IP 彻底不出现国内真实地址。
+3. **`https://iplark.com/`（IP 风险与类型深度检测）**：一站式查询当前节点的欺诈分数、原生属性与机房/住宅判定，是选定节点前的首道门禁；
+4. **`https://scamalytics.com/ip/{IP}`（反欺诈信誉数据库）**：查看欺诈分值（Fraud Score），安全门禁为 **< 15 分**（低风险绿色区间）；
+5. **`https://ipinfo.io/{IP}`（运营商属性核验）**：核对 `org` 与 `asn`，**`type` 字段必须显示为 `isp`（住宅宽带）**，绝不能为 `hosting`（机房数据中心）；
+6. **`https://browserleaks.com/webrtc`（WebRTC 深度排查）**：确保页面中的 Public IP 与 Local IP 彻底不出现国内真实地址。
 
 ---
 
@@ -532,7 +533,7 @@ echo "macOS 本地凭据与指纹缓存已全量重置！"
 
 每次使用或配置时，对照以下清单逐一打勾：
 
-- [ ] **1. 网络出口**：节点是否为支持地区的**固定独享节点**？通过 `ipinfo.io` 确认 `Type: isp`，`scamalytics.com` 确认 Fraud Score < 15 分？
+- [ ] **1. 网络出口**：节点是否为支持地区的**固定独享节点**？通过 `ipinfo.io` 确认 `Type: isp`，通过 `iplark.com` 或 `scamalytics.com` 确认 Fraud Score < 15 分？
 - [ ] **2. 时区对齐**：是否遵循**双轨制**？（亚太节点配台北/新加坡时区；欧美节点配对应城市当地时区，绝不跨区撕裂）
 - [ ] **3. 系统防漏**：网卡已禁用 **IPv6**？路由器/本地已屏蔽 **Type 64/65**？浏览器已防御 **WebRTC**？代理软件已开启 **TUN 模式**？
 - [ ] **4. 浏览器纯净**：是否使用**原生无痕窗口**？已摒弃任何导致反爬过度拟合的指纹伪装插件？

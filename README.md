@@ -47,13 +47,14 @@
 
 ---
 
-## 🛠️ 2026 四重交叉自查矩阵
+## 🛠️ 2026 交叉自查黄金矩阵
 
-在正式访问或充值前，必须按顺序完成四重检查：
+在正式访问或充值前，必须按顺序完成检查：
 1. **`https://ip.net.coffee/claude/`**：Claude 专属环境与网络纯净度检测；
 2. **`https://claudetester.com`**：Claude 浏览器指纹、Canvas、字体与时区语言对齐；
-3. **`https://scamalytics.com/ip/{IP}`**：Fraud Score 必须 **< 15 分**（低风险区）；
-4. **`https://ipinfo.io/{IP}`**：`Type` 必须显示为 **`isp`**（民用住宅宽带），不可为 `hosting`。
+3. **`https://iplark.com/`**：IP 风险深度检测、原生属性与欺诈分判定（首道门禁）；
+4. **`https://scamalytics.com/ip/{IP}`**：Fraud Score 必须 **< 15 分**（低风险区）；
+5. **`https://ipinfo.io/{IP}`**：`Type` 必须显示为 **`isp`**（民用住宅宽带），不可为 `hosting`。
 
 ---
 
